@@ -24,7 +24,7 @@ count_vect = CountVectorizer()
 X_train_tf = count_vect.fit_transform(twenty_train.data)
 tfidf_transformer = TfidfTransformer()
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_tf)
-# print(X_train_tfidf.shape)
+
 mod = MultinomialNB()
 mod.fit(X_train_tfidf, twenty_train.target)
 X_test_tf = count_vect.transform(twenty_test.data)

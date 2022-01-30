@@ -2,8 +2,6 @@ from math import exp
 from random import seed
 from random import random
 
-# Initialize a network
-
 
 def initialize_network(n_inputs, n_hidden, n_outputs):
     network = list()
@@ -15,8 +13,6 @@ def initialize_network(n_inputs, n_hidden, n_outputs):
     network.append(output_layer)
     return network
 
-# Calculate neuron activation for an input
-
 
 def activate(weights, inputs):
     activation = weights[-1]
@@ -24,13 +20,9 @@ def activate(weights, inputs):
         activation += weights[i] * inputs[i]
     return activation
 
-# Transfer neuron activation
-
 
 def transfer(activation):
     return 1.0 / (1.0 + exp(-activation))
-
-# Forward propagate input to a network output
 
 
 def forward_propagate(network, row):
@@ -44,13 +36,9 @@ def forward_propagate(network, row):
         inputs = new_inputs
     return inputs
 
-# Calculate the derivative of an neuron output
-
 
 def transfer_derivative(output):
     return output * (1.0 - output)
-
-# Backpropagate error and store in neurons
 
 
 def backward_propagate_error(network, expected):
@@ -71,8 +59,6 @@ def backward_propagate_error(network, expected):
             neuron = layer[j]
             neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
 
-# Update network weights with error
-
 
 def update_weights(network, row, l_rate):
     for i in range(len(network)):
@@ -83,8 +69,6 @@ def update_weights(network, row, l_rate):
             for j in range(len(inputs)):
                 neuron['weights'][j] += l_rate * neuron['delta'] * inputs[j]
             neuron['weights'][-1] += l_rate * neuron['delta']
-
-# Train a network for a fixed number of epochs
 
 
 def train_network(network, train, l_rate, n_epoch, n_outputs):
@@ -101,7 +85,6 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
         print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
 
 
-# Test training backprop algorithm
 seed(1)
 dataset = [[2.7810836, 2.550537003, 0],
            [1.465489372, 2.362125076, 0],
